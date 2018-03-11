@@ -8,24 +8,13 @@ function processToSTR(csv) {
         var sentence = data[1];
         blocks.push(new Block(number, time, sentence));
     }
-    console.log(blocks);
+    downloadFile(arrayToSTRBlock(blocks), 'data:text/plain;charset=utf-8,', "subtitulos_str.str" );
+}
 
+function arrayToSTRBlock(blocks){
     var blocksTEXT = "";
     blocks.forEach(function (block) {
         blocksTEXT += block.number + "\n" + block.time + "\n" + block.sentence + "\n";
     });
-    downloadSTR(blocksTEXT);
-}
-
-function downloadSTR(text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', "subtitulos_str.str");
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
+    return blocksTEXT;
 }

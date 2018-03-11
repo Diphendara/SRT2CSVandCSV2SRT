@@ -2,15 +2,13 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="text2CSV.js"></script>
+    <script src="str2csv.js"></script>
     <script src="Block.js"></script>
     <script src="csv2str.js"></script>
     <script src="fileHandler.js"></script>
     <script>
         $(document).ready(function () {
             $('input#str2cvsBurron').click(function () {
-                //var text = $('textarea#content').val().split('\n');
-                //transformToCSV(text)
                 fileHandler("str2csvInput", str2csvHandler);
             });
 
@@ -48,11 +46,9 @@
     <br>
     <div>
         <h1>Aqui el CSV --> STR</h1>
-        <input type="file" id="Input" accept=".csv">
+        <input type="file" id="csv2strInput" accept=".csv">
         <br>
         <input type="button" value="CSV --> STR" id="cvs2strButton" />
-        <br>
-        <div id="editor"></div>
     </div>
 </body>
 

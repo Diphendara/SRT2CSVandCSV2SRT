@@ -1,27 +1,13 @@
-function downloadCSV(text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/csv;charset=UTF-8,'  + '\uFEFF' + encodeURIComponent(text));
-    element.setAttribute('download', "subtitulos_csv.csv");
-
-    element.style.display = 'none';
-    document.body.appendChild(element);
-
-    element.click();
-
-    document.body.removeChild(element);
-}
-
 function processToCSV(lines) {
     var linesWithTrim = lines.map(function (x) {
         return x.trim();
     });
-    console.log(linesWithTrim.length);
     var number = "";
     var time = "";
     var sentence = "";
     var blocks = [];
     for (var i = 0; i < linesWithTrim.length; i++) {
-        if (linesWithTrim[i].length == 1) {
+        if (checkStartBlock(linesWithTrim[i])) {
             number = linesWithTrim[i];
             continue;
         } else if (linesWithTrim[i].includes("-->")) {
@@ -38,9 +24,16 @@ function processToCSV(lines) {
             sentence = "";
         }
     }
+    downloadFile(arrayToCSVLine(blocks), 'data:text/csv;charset=UTF-8,'  + '\uFEFF', 'subtitulos_csv.csv');
+}  
+
+function arrayToCSVLine(blocks){
     var blocksTEXT = "Tiempo; Texto\n";
     blocks.forEach(function (x) {
         blocksTEXT += x.time + ";" + x.sentence + " \n";
     });
-    downloadCSV(blocksTEXT.trim());
-}            
+    return blocksTEXT.trim();
+}
+function checkStartBlock(text){
+    return text.length == 1 && text.match(new RegExp('^\\d+$'));
+}

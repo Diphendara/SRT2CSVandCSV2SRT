@@ -26,4 +26,15 @@ function getAsText(fileToRead, loadHandler) {
     reader.onerror = errorHandler;
 }
 
+function downloadFile(text, data, name) {
+    var element = document.createElement('a');
+    element.setAttribute('href', data + encodeURIComponent(text));
+    element.setAttribute('download', name);
 
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
