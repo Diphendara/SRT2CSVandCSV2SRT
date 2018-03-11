@@ -1,4 +1,4 @@
-function processToSTR(csv) {
+function processToSRT(csv) {
     var allTextLines = csv.split(/\r\n|\n/);
     var blocks = [];
     for (var i = 1; i < allTextLines.length; i++) {
@@ -8,10 +8,10 @@ function processToSTR(csv) {
         var sentence = data[1];
         blocks.push(new Block(number, time, sentence));
     }
-    downloadFile(arrayToSTRBlock(blocks), 'data:text/plain;charset=utf-8,', "subtitulos_str.str" );
+    downloadFile(arrayToSRTBlock(blocks), 'data:text/plain;charset=utf-8,', "subtitulos_srt.srt" );
 }
 
-function arrayToSTRBlock(blocks){
+function arrayToSRTBlock(blocks){
     var blocksTEXT = "";
     blocks.forEach(function (block) {
         blocksTEXT += block.number + "\n" + block.time + "\n" + block.sentence + "\n";

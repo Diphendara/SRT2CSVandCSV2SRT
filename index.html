@@ -2,28 +2,28 @@
 
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="str2csv.js"></script>
+    <script src="srt2csv.js"></script>
     <script src="Block.js"></script>
-    <script src="csv2str.js"></script>
+    <script src="csv2srt.js"></script>
     <script src="fileHandler.js"></script>
     <script>
         $(document).ready(function () {
-            $('input#str2cvsBurron').click(function () {
-                fileHandler("str2csvInput", str2csvHandler);
+            $('input#srt2cvsButton').click(function () {
+                fileHandler("srt2csvInput", srt2csvHandler);
             });
 
-            $('input#cvs2strButton').click(function () {
-                fileHandler("csv2strInput", csv2strHandler);
+            $('input#cvs2srtButton').click(function () {
+                fileHandler("csv2srtInput", csv2srtHandler);
             });
 
-            function str2csvHandler(event) {
+            function srt2csvHandler(event) {
                 var data = event.target.result;
                 processToCSV(data.split('\n'));
             }
 
-            function csv2strHandler(event) {
+            function csv2srtHandler(event) {
                 var data = event.target.result;
-                processToSTR(data);
+                processToSRT(data);
             };
         });
     </script>
@@ -37,18 +37,18 @@
 
 <body>
     <div>
-        <h1>Aqui el STR --> CSV</h1>
-        <input type="file" id="str2csvInput" accept=".str">
+        <h1>Aqui el SRT --> CSV</h1>
+        <input type="file" id="srt2csvInput" accept=".srt">
         <br>
-        <input type="button" value="STR --> CSV" id="str2cvsBurron" />
+        <input type="button" value="SRT --> CSV" id="srt2cvsButton" />
     </div>
     <br>
     <br>
     <div>
-        <h1>Aqui el CSV --> STR</h1>
-        <input type="file" id="csv2strInput" accept=".csv">
+        <h1>Aqui el CSV --> SRT</h1>
+        <input type="file" id="csv2srtInput" accept=".csv">
         <br>
-        <input type="button" value="CSV --> STR" id="cvs2strButton" />
+        <input type="button" value="CSV --> SRT" id="cvs2srtButton" />
     </div>
 </body>
 
