@@ -1,8 +1,6 @@
-
-function transformToCSV(text) {
-    var response = processText(text);
+function downloadCSV(text) {
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/csv;charset=UTF-8,'  + '\uFEFF' + encodeURIComponent(response));
+    element.setAttribute('href', 'data:text/csv;charset=UTF-8,'  + '\uFEFF' + encodeURIComponent(text));
     element.setAttribute('download', "subtitulos_csv.csv");
 
     element.style.display = 'none';
@@ -13,12 +11,11 @@ function transformToCSV(text) {
     document.body.removeChild(element);
 }
 
-
-function processText(lines) {
+function processToCSV(lines) {
     var linesWithTrim = lines.map(function (x) {
         return x.trim();
     });
-
+    console.log(linesWithTrim.length);
     var number = "";
     var time = "";
     var sentence = "";
@@ -34,7 +31,7 @@ function processText(lines) {
             sentence += linesWithTrim[i];
             continue;
         } else if (linesWithTrim[i].length == 0) {
-            alert(number + "\n" + time + "\n" + sentence);
+            //alert(number + "\n" + time + "\n" + sentence);
             blocks.push(new Block(number, time, sentence));
             number = "";
             time = "";
@@ -45,5 +42,5 @@ function processText(lines) {
     blocks.forEach(function (x) {
         blocksTEXT += x.time + ";" + x.sentence + " \n";
     });
-    return blocksTEXT.trim();
+    downloadCSV(blocksTEXT.trim());
 }            
